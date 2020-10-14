@@ -30,7 +30,7 @@
             return randomWord;
         }
 
-        function playRound(playerSelection, computerSelection) {
+        function scoreRound(playerSelection, computerSelection) {
 
             //compare the selection of the player to the computer's selection (if else statements)
             //a. If computer gets rock and player gets scissors
@@ -58,11 +58,19 @@
 
         }
 
+        function playRound() {
+            let playerChoice = prompt("Rock, paper, or scissors?");
+            let playerLowerCase = playerChoice.toLowerCase();
+            const playerSelection = playerLowerCase;
+            const computerSelection = computerPlay();
+            const result = scoreRound(playerSelection, computerSelection);
+        }
+
         function game() {
             //loop through 5 interations of playRound.
             let i = 0;
             while (i < 5) {
-                playRound(playerSelection, computerSelection);
+                playRound();
                 i++;
             }
 
@@ -74,11 +82,6 @@
                 return "It's a tie";
             }
         }
-
-        let playerChoice = prompt("Rock, paper, or scissors?");
-        let playerLowerCase = playerChoice.toLowerCase();
-        const playerSelection = playerLowerCase;
-        const computerSelection = computerPlay();
 
         console.log(game());
     </script>
