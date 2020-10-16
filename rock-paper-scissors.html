@@ -19,10 +19,20 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+    <!--Three icons with rock paper scissors go-->
+    <div class="choice container">
+        <div class="rock"></div>
+        <div class="paper"></div>
+        <div class="scissors"></div>
+    </div>
+
+
+
     <script>
         let options = ["Rock", "Paper", "Scissors"];
         let c = [];
         let p = [];
+        let log = console.log;
 
         function computerPlay() {
             let randomIndex = Math.floor(Math.random() * options.length);
@@ -30,15 +40,17 @@
             return randomWord;
         }
 
-        function playerLowerCase() {
-            let playerChoice = prompt("Rock, paper, or scissors?");
-            let playerLowCase = playerChoice.toLowerCase();
+        function playTurn(player, comp) {
+            let player = prompt("Rock, paper or scissors?");
+            let comp = computerPlay();
         }
 
-        function playRound(playerSelection, computerSelection) {
+
+
+        function scoreRound(playerSelection, computerSelection) {
 
             //compare the selection of the player to the computer's selection (if else statements)
-            //a. If computer gets rock and player gets scissors
+            //a. If computer gets X and player gets X/Y
 
             if (playerSelection == "rock" && computerSelection == "Paper") {
                 c.push(1);
@@ -59,30 +71,37 @@
             } else if (playerSelection == "scissors" && computerSelection == "Scissors") {
                 return "tie";
             }
-
-
         }
 
-        const playerSelection = playerLowerCase();
-        const computerSelection = computerPlay();
+        function playRound() {
+            let playerChoice = prompt("Rock, paper, or scissors?");
+            let playerLowCase = playerChoice.toLowerCase();
+            const playerSelection = playerLowCase;
+            const computerSelection = computerPlay();
+            const result = scoreRound(playerSelection, computerSelection);
+        }
+
 
         function game() {
             //loop through 5 interations of playRound.
             let i = 0;
             while (i < 5) {
-                playRound(playerSelection, computerSelection);
+                playRound();
                 i++;
+
+                if (c.length >= 2) {
+                    return "Computer wins!";
+                } else if (p.length >= 2) {
+                    return "You win!";
+                } else {
+                    return "It's a tie";
+                }
+
             }
 
-            if (c.length >= 2) {
-                return "Computer wins!";
-            } else if (p.length >= 2) {
-                return "You win!";
-            } else {
-                return "It's a tie";
-            }
-            console.log(game());
         }
+
+        console.log(game());
     </script>
 </body>
 
