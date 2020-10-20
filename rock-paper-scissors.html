@@ -66,7 +66,27 @@
             let comp = computerPlay();
         }
 
+const gameRules = choice => {
+    const lowChoice = choice.toLowerCase();
+    let beatsIt;
+switch(lowChoice){
+    case 'scissors':
+        beatsIt = "rock";
+         break;
+    case 'paper': 
+        beatsIt = "scissors";
+        break;
+    case: 'rock';
+        beatsIt = "paper";
+        break;
+    default: 
+        beatsIt = "tie";
 
+}
+
+
+
+}
 
         function scoreRound(playerSelection, computerSelection) {
 
