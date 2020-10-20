@@ -66,6 +66,7 @@
             let comp = computerPlay();
         }
 
+
 const gameRules = choice => {
     const lowChoice = choice.toLowerCase();
     let beatsIt;
@@ -76,7 +77,7 @@ switch(lowChoice){
     case 'paper': 
         beatsIt = "scissors";
         break;
-    case 'rock';
+    case 'rock':
         beatsIt = "paper";
         break;
     default: 
@@ -84,6 +85,8 @@ switch(lowChoice){
 
 }
 
+return beatsIt;
+};
 
 
 }
