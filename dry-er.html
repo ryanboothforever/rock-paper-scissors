@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!--Player "Click an Option" logo here-->
+    <div class="icon">
+        <img src="images/choose-weapon-icon.png" alt="choose weapon icon">
+    </div>
+
+    <!--Three icons with rock paper scissors go-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="column">
+                <span class="object-box">
+                    <img src="images/rock.png" class="rock" alt="a rock">
+                </span>
+
+            </div>
+            <div class="column">
+                <span class="object-box">
+                    <img src="images/paper.png" class="paper" alt="sheet of paper">
+                </span>
+
+            </div>
+            <div class="column">
+                <span class="object-box">
+                    <img src="images/scissors.png" class="scissors" alt="scissors">
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        let options = ["Rock", "Paper", "Scissors"];
+        let c = [];
+        let p = [];
+        let log = console.log;
+
+        function computerPlay() {
+            let randomIndex = Math.floor(Math.random() * options.length);
+            let randomWord = options[randomIndex];
+            return randomWord;
+        }
+
+        // function playTurn(player, comp) {
+        //     let player = prompt("Rock, paper or scissors?");
+        //     let comp = computerPlay();
+        // }
+
+
+    const gameRules = choice => {
+        const lowChoice = choice.toLowerCase();
+        let beatsIt;
+        switch(lowChoice) {
+            case 'scissors':
+                beatsIt = "rock";
+                break;
+            case 'paper': 
+                beatsIt = "scissors";
+                break;
+            case 'rock':
+                beatsIt = "paper";
+                break;
+            default: 
+                beatsIt = "tie";
+        }
+
+        return beatsIt;
+    };
+
+    const dryGameRules = choice => {
+        const lowChoice = choice.toLowerCase();
+        const beatenBy = {
+            scissors: 'rock',
+            paper: 'scissors',
+            rock: 'paper',
+        };
+
+        let beatsIt = beatenBy[choice];
+        if (!beatsIt) {
+            beatsIt = 'tie';
+        }
+
+        return beatsIt;
+    }
+
+
+
+
+    function scoreRound(playerSelection, computerSelection) {
+
+        //compare the selection of the player to the computer's selection (if else statements)
+        //a. If computer gets X and player gets X/Y
+
+        if (playerSelection == "rock" && computerSelection == "Paper") {
+            c.push(1);
+        } else if (playerSelection == "paper" && computerSelection == "Paper") {
+            return "tie";
+        } else if (playerSelection == "scissors" && computerSelection == "Paper") {
+            p.push(1);
+        } else if (playerSelection == "rock" && computerSelection == "Rock") {
+            return "tie";
+        } else if (playerSelection == "paper" && computerSelection == "Rock") {
+            p.push(1);
+        } else if (playerSelection == "scissors" && computerSelection == "Rock") {
+            c.push(1);
+        } else if (playerSelection == "rock" && computerSelection == "Scissors") {
+            p.push(1);
+        } else if (playerSelection == "paper" && computerSelection == "Scissors") {
+            c.push(1);
+        } else if (playerSelection == "scissors" && computerSelection == "Scissors") {
+            return "tie";
+        }
+    }
+
+    function playRound() {
+        let playerChoice = prompt("Rock, paper, or scissors?");
+        let playerLowCase = playerChoice.toLowerCase();
+        const playerSelection = playerLowCase;
+        const computerSelection = computerPlay().toLowerCase(); // going ahead and converting this to lower since the rest of our scoring logic uses lower case
+        const beatsPlayerSelection = gameRules(playerSelection);
+        const beatsComputerSelection = gameRules(computerSelection);
+        
+        if (playerSelection === beatsComputerSelection) {
+            console.log(`${playerSelection} beats ${computerSelection}, player wins this round!`);
+            p.push(1);
+        } else if (computerSelection === beatsPlayerSelection) {
+            console.log(`${computerSelection} beats ${playerSelection}, computer wins this round!`);
+            c.push(1);
+        } else {
+            console.log(`${computerSelection} ties with ${playerSelection}, this round a tie!`);
+        }
+    }
+
+
+        function game() {
+            //loop through 5 interations of playRound.
+            let i = 0;
+            while (i < 5) {
+                playRound();
+                i++;
+            }
+
+            // Moved this outside the loop so we dont return from game() after first iteration of loop
+            if (c.length >= 2) {
+                return "Computer beat you!!!"; // Returning exits your entire function, not just the loop
+            } else if (p.length >= 2) {
+                return "You win!";
+            } else {
+                return "It's a tie";
+            }
+
+        }
+
+        console.log(game());
+    </script>
+</body>
+
+</html>
