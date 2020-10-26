@@ -61,16 +61,10 @@
             return randomWord;
         }
 
-        // function playTurn(player, comp) {
-        //     let player = prompt("Rock, paper or scissors?");
-        //     let comp = computerPlay();
-        // }
-
-
     const gameRules = choice => {
         const lowChoice = choice.toLowerCase();
         let beatsIt;
-        switch(lowChoice){
+        switch(lowChoice) {
             case 'scissors':
                 beatsIt = "rock";
                 break;
@@ -82,74 +76,45 @@
                 break;
             default: 
                 beatsIt = "tie";
-
         }
 
         return beatsIt;
     };
 
 
-
-
-    function scoreRound(playerSelection, computerSelection) {
-
-        //compare the selection of the player to the computer's selection (if else statements)
-        //a. If computer gets X and player gets X/Y
-
-        if (playerSelection == "rock" && computerSelection == "Paper") {
-            c.push(1);
-        } else if (playerSelection == "paper" && computerSelection == "Paper") {
-            return "tie";
-        } else if (playerSelection == "scissors" && computerSelection == "Paper") {
-            p.push(1);
-        } else if (playerSelection == "rock" && computerSelection == "Rock") {
-            return "tie";
-        } else if (playerSelection == "paper" && computerSelection == "Rock") {
-            p.push(1);
-        } else if (playerSelection == "scissors" && computerSelection == "Rock") {
-            c.push(1);
-        } else if (playerSelection == "rock" && computerSelection == "Scissors") {
-            p.push(1);
-        } else if (playerSelection == "paper" && computerSelection == "Scissors") {
-            c.push(1);
-        } else if (playerSelection == "scissors" && computerSelection == "Scissors") {
-            return "tie";
-        }
-    }
-
     function playRound() {
         let playerChoice = prompt("Rock, paper, or scissors?");
         let playerLowCase = playerChoice.toLowerCase();
         const playerSelection = playerLowCase;
-        const computerSelection = computerPlay();
+        const computerSelection = computerPlay().toLowerCase(); 
         const beatsPlayerSelection = gameRules(playerSelection);
-        const beatsComputerSelection = gameRules(computerSelection.toLowerCase());
+        const beatsComputerSelection = gameRules(computerSelection);
         
         if (playerSelection === beatsComputerSelection) {
-            console.log(`${playerSelection} beats ${computerSelection}, player wins!`);
+            console.log(`${playerSelection} beats ${computerSelection}, player wins this round!`);
+            p.push(1);
         } else if (computerSelection === beatsPlayerSelection) {
-            console.log(`${computerSelection} beats ${playerSelection}, computer wins!`);
+            console.log(`${computerSelection} beats ${playerSelection}, computer wins this round!`);
+            c.push(1);
         } else {
-            console.log(`${computerSelection} ties with ${playerSelection}, its a tie!`);
+            console.log(`${computerSelection} ties with ${playerSelection}, this round a tie!`);
         }
     }
 
 
         function game() {
-            //loop through 5 interations of playRound.
             let i = 0;
             while (i < 5) {
                 playRound();
                 i++;
+            }
 
-                if (c.length >= 2) {
-                    return "Computer beat you!!!"; // Returning exits your entire function, not just the loop
-                } else if (p.length >= 2) {
-                    return "You win!";
-                } else {
-                    return "It's a tie";
-                }
-
+            if (c.length >= 2) {
+                return "Computer beat you!!!"; 
+            } else if (p.length >= 2) {
+                return "You win!";
+            } else {
+                return "It's a tie";
             }
 
         }
